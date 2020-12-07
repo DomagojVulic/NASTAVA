@@ -1,0 +1,37 @@
+drop database if exists salonzauljepsavanje;
+create database salonzauljepsavanje;
+
+use  salonzauljepsavanje;
+
+create table djelatnik(
+    sifra int not null primary key auto_increment,
+    ime varchar(50) not null,
+    prezime varchar(50) not null
+    
+);
+create table korisnik(
+    sifra int not null primary key auto_increment,
+    ime varchar(50) not null,
+    prezime varchar(50) not null,
+    djelatnik int not null
+);
+
+
+    create table posjet (
+        sifra int not null primary key auto_increment,
+        korisnik int not null,
+        usluga int not null
+    );
+
+    create table usluga(
+        sifra int not null primary key auto_increment,
+        ime varchar(50) not null,
+        cijena int not null
+
+    );
+
+    alter table posjet  add foreign key (usluga) references usluga(sifra);
+
+    alter table korisnik add foreign key (djelatnik) references djelatnik(sifra);
+
+    alter table posjet add foreign key (korisnik) references korisnik(sifra);
