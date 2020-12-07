@@ -1,0 +1,44 @@
+drop database if exists taksisluzba;
+create database taksisluzba;
+
+use taksisluzba;
+
+create table vozac (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    prezime varchar(50) not null,
+    godinestaza int (2)
+);
+
+create table vozilo (
+    sifra int not null primary key auto_increment,
+    ime varchar(50),
+    vozac int
+   );
+
+
+    create table putnik (
+        sifra int not null primary key auto_increment,
+        ime varchar(50)not null,
+        prezime varchar(50) not null
+   
+ );
+
+    create table voznja (
+        sifra int not null primary key auto_increment,
+        broj int,
+        vozac int
+
+    );
+
+    create table putnik_voznja( 
+        sifra int not null primary key auto_increment,
+        putnik int,
+        voznja int
+    );
+    alter table vozilo add foreign key (vozac) references vozac(sifra);
+
+    alter table voznja add foreign key (vozac) references vozac(sifra);
+
+    alter table putnik_voznja add foreign key (putnik) references putnik(sifra);
+    alter table putnik_voznja add foreign key (voznja) references voznja(sifra);
