@@ -1,0 +1,35 @@
+drop database if exists osnovnaskola;
+create database osnovnaskola;
+
+use osnovnaskola;
+create table uciteljica (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    prezime varchar(50) not null,
+    godinestaza int (2)
+);
+
+create table dijete (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    prezime varchar(50) not null
+);
+
+create table radionica (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    uciteljica int
+);
+
+create table radionica_dijete (
+    sifra int not null primary key auto_increment,
+    ime varchar(50),
+    dijete int,
+    radionica int
+   );
+
+   
+    alter table radionica add foreign key (uciteljica) references uciteljica(sifra);
+     
+   alter table radionica_dijete add foreign key (radionica) references radionica(sifra);
+  alter table radionica_dijete add foreign key (dijete) references dijete(sifra);
