@@ -1,0 +1,34 @@
+drop database if exists udruga;
+create database udruga;
+
+use udruga;
+
+create table prostor ( 
+	sifra int not null primary key auto_increment,
+	naziv varchar(50)
+	);
+
+	create table sticenik(
+	sifra int not null primary key auto_increment,
+	godine int,
+	prostor int);
+
+create table osoba(
+	sifra int not null primary key auto_increment,
+	ime varchar(50) not null,
+	prezime varchar(50) not null,
+	sticenik int);
+
+create table zivotinja (
+	sifra int not null primary key auto_increment,
+	vrsta varchar(50),
+	sticenik int);
+
+	
+
+
+	alter table osoba add foreign key (sticenik) references sticenik(sifra);
+	
+	alter table zivotinja add foreign key (sticenik) references sticenik(sifra);
+
+	alter table sticenik add foreign key (prostor) references prostor(sifra);
