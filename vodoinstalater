@@ -1,0 +1,60 @@
+drop database if exists vodoinstalater;
+create database vodoinstalater;
+
+use vodoinstalater;
+create table segrt (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    prezime varchar(50) not null,
+    godinestaza int (2)
+   
+);
+
+create table vodoinstalater (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    prezime varchar(50) not null,
+    godinestaza int (2),
+    segrt int
+);
+
+create table instalacija (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    kvar int
+);
+
+create table kvar (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)
+    
+   );
+
+
+    create table popravak (
+        sifra int not null primary key auto_increment,
+        ime varchar(50)not null,
+        cijena int not null,
+        vodoinstalater int
+   
+ );
+
+    create table popravak_kvar(
+        sifra int not null primary key auto_increment,
+                 popravak int,
+                 kvar int
+
+ );
+
+   
+    alter table vodoinstalater add foreign key (segrt) references segrt(sifra);
+
+    alter table popravak add foreign key (vodoinstalater) references vodoinstalater(sifra);
+
+    alter table instalacija add foreign key (kvar) references kvar(sifra);
+   
+   
+   
+   
+   alter table popravak_kvar add foreign key (kvar) references kvar(sifra);
+  alter table popravak_kvar add foreign key (popravak) references popravak(sifra);
