@@ -1,0 +1,34 @@
+drop database if exists nakladnik;
+create database nakladnik;
+
+use nakladnik;
+
+create table mjesto (  
+sifra int not null primary key auto_increment,
+ime varchar(50)
+);
+create table nakladnik (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    mjesto int
+   
+);
+
+create table djelo (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    autor varchar(50) not null
+);
+
+create table nakladnik_djelo (
+    sifra int not null primary key auto_increment,
+    nakladnik int,
+    djelo int
+);
+
+
+  
+    alter table nakladnik add foreign key (mjesto) references mjesto(sifra);
+
+    alter table nakladnik_djelo add foreign key (nakladnik) references nakladnik(sifra);
+  alter table nakladnik_djelo add foreign key (djelo) references djelo(sifra);
