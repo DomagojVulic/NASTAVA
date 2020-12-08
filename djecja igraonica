@@ -1,0 +1,42 @@
+drop database if exists djecjaigraonica;
+create database djecjaigraonica;
+
+use djecjaigraonica;
+
+create table igraonica ( 
+sifra int not null primary key auto_increment,
+ime varchar(50),
+skupina int);
+
+
+create table teta (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    prezime varchar(50) not null,
+    godinestaza int (2)
+);
+
+create table dijete (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    prezime varchar(50) not null
+);
+
+create table skupina (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+    teta int
+);
+
+create table skupina_dijete (
+    sifra int not null primary key auto_increment,
+    ime varchar(50),
+    dijete int,
+    skupina int
+   );
+
+	alter table igraonica add foreign key (skupina) references skupina(sifra);
+    alter table skupina add foreign key (teta) references teta(sifra);
+
+   alter table skupina_dijete add foreign key (skupina) references skupina(sifra);
+  alter table skupina_dijete add foreign key (dijete) references dijete(sifra);
