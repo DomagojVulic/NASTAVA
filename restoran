@@ -1,0 +1,39 @@
+drop database if exists restoran;
+create database restoran;
+
+use restoran;
+create table pice (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null
+);
+
+	create table jelo (
+	sifra int not null primary key auto_increment,
+	ime varchar(50) not null
+);
+
+create table jelo_pice (
+    sifra int not null primary key auto_increment,
+    jelo int,
+    pice int
+);
+
+create table kategorija (
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null,
+jelo int
+);
+
+create table jelovnik (
+    sifra int not null primary key auto_increment,
+    ime varchar(50),
+    kategorija int
+   );
+
+  
+   alter table jelovnik add foreign key (kategorija) references kategorija(sifra);
+    alter table kategorija add foreign key (jelo) references jelo(sifra);
+  
+     
+   alter table jelo_pice add foreign key (jelo) references jelo(sifra);
+  alter table jelo_pice add foreign key (pice) references pice(sifra);
